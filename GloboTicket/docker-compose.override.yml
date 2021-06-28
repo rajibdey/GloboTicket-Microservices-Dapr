@@ -12,6 +12,17 @@ services:
     networks:
       - my-network
 
+  shoppingbasketdb:
+    container_name: shoppingbasketdb
+    environment:
+        SA_PASSWORD: "SwN12345678"
+        ACCEPT_EULA: "Y"
+    restart: always
+    ports:
+        - "1435:1433"
+    networks:
+      - my-network
+
   globoticket.web:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -47,10 +58,10 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
-      - "ConnectionStrings:DefaultConnection=Server=eventcatalogdb;Database=ShoppingBasketDb;User Id=sa;Password=SwN12345678;"
+      - "ConnectionStrings:DefaultConnection=Server=shoppingbasketdb;Database=ShoppingBasketDb;User Id=sa;Password=SwN12345678;"
       - "ApiConfigs:EventCatalog:Uri=http://globoticket.services.eventcatalog"
     depends_on:
-        - eventcatalogdb
+        - shoppingbasketdb
         - globoticket.services.eventcatalog
     ports:
       - "5002:80"

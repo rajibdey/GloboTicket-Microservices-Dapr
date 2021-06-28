@@ -4,6 +4,9 @@ services:
   eventcatalogdb:
     image: mcr.microsoft.com/mssql/server:2017-latest
 
+  shoppingbasketdb:
+    image: mcr.microsoft.com/mssql/server:2017-latest
+
   globoticket.web:
     image: ${DOCKER_REGISTRY-}globoticketweb
     build:
