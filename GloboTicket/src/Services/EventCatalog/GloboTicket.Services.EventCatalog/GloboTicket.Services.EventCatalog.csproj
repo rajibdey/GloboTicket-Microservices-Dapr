@@ -23,7 +23,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\GloboTicket.Packages.Extensions\GloboTicket.Packages.Extensions.csproj" />
+	  <ProjectReference Include="..\..\..\Packages\Extensions\GloboTicket.Packages.Extensions\GloboTicket.Packages.Extensions.csproj" />
 	</ItemGroup>
 
 </Project>

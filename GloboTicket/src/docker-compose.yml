@@ -11,20 +11,20 @@ services:
     image: ${DOCKER_REGISTRY-}globoticketweb
     build:
       context: .
-      dockerfile: GloboTicket.Client/Dockerfile
+      dockerfile: Frontends/GloboTicket/GloboTicket.Client/Dockerfile
 
   globoticket.services.eventcatalog:
     image: ${DOCKER_REGISTRY-}globoticketserviceseventcatalog
     build:
       context: .
-      dockerfile: GloboTicket.Services.EventCatalog/Dockerfile
+      dockerfile: Services/EventCatalog/GloboTicket.Services.EventCatalog/Dockerfile
 
 
   globoticket.services.shoppingbasket:
     image: ${DOCKER_REGISTRY-}globoticketservicesshoppingbasket
     build:
       context: .
-      dockerfile: GloboTicket.Services.ShoppingBasket/Dockerfile
+      dockerfile: Services/ShoppingBasket/GloboTicket.Services.ShoppingBasket/Dockerfile
 
 networks:
   my-network:
