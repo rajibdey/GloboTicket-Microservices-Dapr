@@ -1,3 +1,4 @@
+GloboTicket Microservice using Dapr
 
 There is a couple of microservices which implemented **e-commerce** modules over **Catalog, Basket, Discount** and **Ordering** microservices with **NoSQL (MongoDB, Redis)** and **Relational databases (PostgreSQL, Sql Server)** with communicating over **RabbitMQ Event Driven Communication** and using **Ocelot API Gateway**.
 
@@ -50,13 +51,9 @@ docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d
 
 6. Launch http://host.docker.internal:5000 in your browser to view the Web UI. You can use Web project in order to **call microservices over API Gateway**. When you **checkout the basket** you can follow **queue record on RabbitMQ dashboard**.
 
-![mainscreen2](https://user-images.githubusercontent.com/1147445/81381837-08226000-9116-11ea-9489-82645b8dbfc4.png)
-
 >Note: If you are running this application in macOS then use `docker.for.mac.localhost` as DNS name in `.env` file and the above URLs instead of `host.docker.internal`.
 
 ## Authors
 
-* **Mehmet Ozkaya** - *Initial work* - [mehmetozkaya](https://github.com/mehmetozkaya)
-
-See also the list of [contributors](https://github.com/rajibdey/GloboTicket-Microservices-Dapr/run-core/contributors) who participated in this project. Check also [gihtub page of repository.](https://aspnetrun.github.io/run-aspnetcore-angular-realworld/)
-
+* **Rajib Dey** - *Docker implementation* - [rajibdey](https://github.com/rajibdey)
+* **RolandGuijt** - *Initial work* - [RolandGuijt](https://github.com/RolandGuijt)
