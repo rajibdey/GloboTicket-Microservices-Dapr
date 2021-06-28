@@ -1,0 +1,62 @@
+version: '3.4'
+
+services:
+  eventcatalogdb:
+    container_name: eventcatalogdb
+    environment:
+        SA_PASSWORD: "SwN12345678"
+        ACCEPT_EULA: "Y"
+    restart: always
+    ports:
+        - "1434:1433"
+    networks:
+      - my-network
+
+  globoticket.web:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+    depends_on:
+        - globoticket.services.eventcatalog
+        - globoticket.services.shoppingbasket
+    ports:
+      - "5000:80"
+      - "443"
+    networks:
+      - my-network
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+  globoticket.services.eventcatalog:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - "ConnectionStrings:DefaultConnection=Server=eventcatalogdb;Database=EventCatalogDb;User Id=sa;Password=SwN12345678;"
+    depends_on:
+        - eventcatalogdb
+    ports:
+      - "5001:80"
+      - "443"
+    networks:
+      - my-network
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+  globoticket.services.shoppingbasket:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - "ConnectionStrings:DefaultConnection=Server=eventcatalogdb;Database=ShoppingBasketDb;User Id=sa;Password=SwN12345678;"
+      - "ApiConfigs:EventCatalog:Uri=http://globoticket.services.eventcatalog"
+    depends_on:
+        - eventcatalogdb
+        - globoticket.services.eventcatalog
+    ports:
+      - "5002:80"
+      - "443"
+    networks:
+      - my-network
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro

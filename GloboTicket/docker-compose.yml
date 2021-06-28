@@ -1,0 +1,28 @@
+version: '3.4'
+
+services:
+  eventcatalogdb:
+    image: mcr.microsoft.com/mssql/server:2017-latest
+
+  globoticket.web:
+    image: ${DOCKER_REGISTRY-}globoticketweb
+    build:
+      context: .
+      dockerfile: GloboTicket.Client/Dockerfile
+
+  globoticket.services.eventcatalog:
+    image: ${DOCKER_REGISTRY-}globoticketserviceseventcatalog
+    build:
+      context: .
+      dockerfile: GloboTicket.Services.EventCatalog/Dockerfile
+
+
+  globoticket.services.shoppingbasket:
+    image: ${DOCKER_REGISTRY-}globoticketservicesshoppingbasket
+    build:
+      context: .
+      dockerfile: GloboTicket.Services.ShoppingBasket/Dockerfile
+
+networks:
+  my-network:
+    external: true

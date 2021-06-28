@@ -1,11 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using GloboTicket.Packages.Extensions;
+using GloboTicket.Services.ShoppingBasket.DbContexts;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace GloboTicket.Services.ShoppingBasket
 {
@@ -13,7 +9,7 @@ namespace GloboTicket.Services.ShoppingBasket
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            CreateHostBuilder(args).Build().MigrateDatabase<ShoppingBasketDbContext>(null).Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
