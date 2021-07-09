@@ -7,10 +7,10 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
 WORKDIR /src
-COPY ["GloboTicket.Client/GloboTicket.Web.csproj", "GloboTicket.Client/"]
-RUN dotnet restore "GloboTicket.Client/GloboTicket.Web.csproj"
+COPY ["Frontends/GloboTicket/GloboTicket.Client/GloboTicket.Web.csproj", "Frontends/GloboTicket/GloboTicket.Client/"]
+RUN dotnet restore "Frontends/GloboTicket/GloboTicket.Client/GloboTicket.Web.csproj"
 COPY . .
-WORKDIR "/src/GloboTicket.Client"
+WORKDIR "/src/Frontends/GloboTicket/GloboTicket.Client"
 RUN dotnet build "GloboTicket.Web.csproj" -c Release -o /app/build
 
 FROM build AS publish

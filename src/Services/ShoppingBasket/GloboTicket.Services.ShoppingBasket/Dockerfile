@@ -7,12 +7,11 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
 WORKDIR /src
-COPY ["GloboTicket.Services.ShoppingBasket/GloboTicket.Services.ShoppingBasket.csproj", "GloboTicket.Services.ShoppingBasket/"]
-COPY ["GloboTicket.Packages.Extensions/GloboTicket.Packages.Extensions.csproj", "GloboTicket.Packages.Extensions/"]
-COPY ["GloboTicket.Services.EventCatalog/GloboTicket.Services.EventCatalog.csproj", "GloboTicket.Services.EventCatalog/"]
-RUN dotnet restore "GloboTicket.Services.ShoppingBasket/GloboTicket.Services.ShoppingBasket.csproj"
+COPY ["Services/ShoppingBasket/GloboTicket.Services.ShoppingBasket/GloboTicket.Services.ShoppingBasket.csproj", "Services/ShoppingBasket/GloboTicket.Services.ShoppingBasket/"]
+COPY ["Packages/Extensions/GloboTicket.Packages.Extensions/GloboTicket.Packages.Extensions.csproj", "Packages/Extensions/GloboTicket.Packages.Extensions/"]
+RUN dotnet restore "Services/ShoppingBasket/GloboTicket.Services.ShoppingBasket/GloboTicket.Services.ShoppingBasket.csproj"
 COPY . .
-WORKDIR "/src/GloboTicket.Services.ShoppingBasket"
+WORKDIR "/src/Services/ShoppingBasket/GloboTicket.Services.ShoppingBasket"
 RUN dotnet build "GloboTicket.Services.ShoppingBasket.csproj" -c Release -o /app/build
 
 FROM build AS publish

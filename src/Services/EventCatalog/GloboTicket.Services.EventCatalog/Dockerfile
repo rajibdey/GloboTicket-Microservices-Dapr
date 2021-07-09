@@ -7,11 +7,11 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
 WORKDIR /src
-COPY ["GloboTicket.Services.EventCatalog/GloboTicket.Services.EventCatalog.csproj", "GloboTicket.Services.EventCatalog/"]
-COPY ["GloboTicket.Packages.Extensions/GloboTicket.Packages.Extensions.csproj", "GloboTicket.Packages.Extensions/"]
-RUN dotnet restore "GloboTicket.Services.EventCatalog/GloboTicket.Services.EventCatalog.csproj"
+COPY ["Services/EventCatalog/GloboTicket.Services.EventCatalog/GloboTicket.Services.EventCatalog.csproj", "Services/EventCatalog/GloboTicket.Services.EventCatalog/"]
+COPY ["Packages/Extensions/GloboTicket.Packages.Extensions/GloboTicket.Packages.Extensions.csproj", "Packages/Extensions/GloboTicket.Packages.Extensions/"]
+RUN dotnet restore "Services/EventCatalog/GloboTicket.Services.EventCatalog/GloboTicket.Services.EventCatalog.csproj"
 COPY . .
-WORKDIR "/src/GloboTicket.Services.EventCatalog"
+WORKDIR "/src/Services/EventCatalog/GloboTicket.Services.EventCatalog"
 RUN dotnet build "GloboTicket.Services.EventCatalog.csproj" -c Release -o /app/build
 
 FROM build AS publish
